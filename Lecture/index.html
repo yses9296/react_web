@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>React_Tutorial_01</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+</head>
+<body>
+    <div id="root"></div> <!-- 결과: <div id="root"><button>Like<button></div> -->
+   
+    <script>
+        const e = React.createElement;
+       
+        class LikeButton extends React.Component {
+            constructor(props){
+                super(props);
+                this.state = {
+                    liked: false,
+                } //State 상태는 바뀔 수 있는 부분, data 값
+            }
+            
+            //method
+            render(){ 
+                //return e('button', null, 'Like'); //<button>Like<button> -> tag 생성 선언
+                //return e('button', {onClick: () => {console.log('clicked')}, type: 'submit' }, 'Like'); 
+                return e('button',  {onClick: () => { this.setState({liked: true}) }, type: 'submit' },  this.state.liked === true ? 'Liked' : 'Like'); 
+                                    //HTML 속성을 넣는 자리 (객체 형식으로 표현)
+                                    //<button onClick="onClick" type="submit">Like<button>   
+            }
+        }
+   </script>
+   <script>
+        ReactDOM.render(e(LikeButton), document.querySelector('#root')); //render( 실행할 함수 , 실행됳 필드)
+   </script>
+</body>
+</html>
